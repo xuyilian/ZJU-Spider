@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="body_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find-pkg-share body_description)/urdf/left_leg_description.xacro" />
+  <xacro:include filename="$(find-pkg-share body_description)/urdf/right_leg_description.xacro" />
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-5.4605E-05 9.9376E-05 -0.018675"
+        rpy="0 0 0" />
+      <mass
+        value="0.093105" />
+      <inertia
+        ixx="4.1311E-05"
+        ixy="1.2608E-06"
+        ixz="4.332E-08"
+        iyy="4.248E-05"
+        iyz="-7.8832E-08"
+        izz="8.2447E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <xacro:left_leg prefix="leg1_" />
+
+  <joint
+    name="leg1_joint"
+    type="revolute">
+    <origin
+      xyz="0.057411 -0.004797 0"
+      rpy="0 0 -0.423478" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg1_left_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+
+  <xacro:left_leg prefix="leg2_" />
+
+  <joint
+    name="leg2_joint"
+    type="revolute">
+    <origin
+      xyz="0.03286 0.047321 0"
+      rpy="0 0 0.62372" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg2_left_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+  
+  <xacro:left_leg prefix="leg3_" />
+
+  <joint
+    name="leg3_joint"
+    type="revolute">
+    <origin
+      xyz="-0.024551 0.052118 0"
+      rpy="0 0 1.6709" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg3_left_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+
+  <xacro:right_leg prefix="leg4_" />
+
+  
+  <joint
+    name="leg4_joint"
+    type="revolute">
+    <origin
+      xyz="-0.057411 0.004797 0"
+      rpy="0 0 2.6781" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg4_right_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+
+  <xacro:right_leg prefix="leg5_" />
+
+  <joint
+    name="leg5_joint"
+    type="revolute">
+    <origin
+      xyz="-0.03286 -0.047321 0"
+      rpy="0 0 -2.5579" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg5_right_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+  
+  <xacro:right_leg prefix="leg6_" />
+  
+  <joint
+    name="leg6_joint"
+    type="revolute">
+    <origin
+      xyz="0.024551 -0.052118 0"
+      rpy="0 0 -1.5107" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg6_right_leg_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+
+
+</robot>

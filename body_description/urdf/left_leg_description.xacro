@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="left_leg_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="left_leg" params="prefix"> 
+  <link name="${prefix}left_leg_base_link">
+    <inertial>
+      <origin
+        xyz="0.022492 0.007129 -0.014892"
+        rpy="0 0 0" />
+      <mass
+        value="0.011294" />
+      <inertia
+        ixx="1.7081E-06"
+        ixy="8.3146E-08"
+        ixz="-1.7531E-07"
+        iyy="1.7861E-06"
+        iyz="-1.213E-08"
+        izz="1.1716E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="${prefix}left_leg_link1">
+    <inertial>
+      <origin
+        xyz="0.025933 0.0030528 -0.022581"
+        rpy="0 0 0" />
+      <mass
+        value="0.017021" />
+      <inertia
+        ixx="2.0908E-06"
+        ixy="1.3565E-08"
+        ixz="-2.3118E-07"
+        iyy="3.6034E-06"
+        iyz="1.3164E-07"
+        izz="2.9314E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}left_leg_joint1"
+    type="revolute">
+    <origin
+      xyz="0.02198 0.027937 -0.00929"
+      rpy="-1.5708 -0.3068 0.34327" />
+    <parent
+      link="${prefix}left_leg_base_link" />
+    <child
+      link="${prefix}left_leg_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="${prefix}left_leg_link2">
+    <inertial>
+      <origin
+        xyz="0.089594 -7.9936E-15 -0.018644"
+        rpy="0 0 0" />
+      <mass
+        value="0.014281" />
+      <inertia
+        ixx="3.6992E-07"
+        ixy="5.4925E-22"
+        ixz="8.5365E-22"
+        iyy="5.5689E-06"
+        iyz="8.4703E-22"
+        izz="5.6129E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}left_leg_joint2"
+    type="revolute">
+    <origin
+      xyz="0.061 0 0"
+      rpy="0 0 1.5481" />
+    <parent
+      link="${prefix}left_leg_link1" />
+    <child
+      link="${prefix}left_leg_link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+    <mimic joint="${prefix}left_leg_joint3" multiplier="-1"/>
+  </joint>
+  <link
+    name="${prefix}left_leg_link3">
+    <inertial>
+      <origin
+        xyz="0.0004307 -0.015395 -0.01826"
+        rpy="0 0 0" />
+      <mass
+        value="0.0042639" />
+      <inertia
+        ixx="1.5353E-06"
+        ixy="8.5323E-09"
+        ixz="8.9451E-10"
+        iyy="1.3235E-06"
+        iyz="-7.4296E-08"
+        izz="3.5073E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}left_leg_joint3"
+    type="revolute">
+    <origin
+      xyz="0.0255 0 0"
+      rpy="0 0 -0.21172" />
+    <parent
+      link="${prefix}left_leg_link1" />
+    <child
+      link="${prefix}left_leg_link3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="${prefix}left_leg_link4">
+    <inertial>
+      <origin
+        xyz="0.016434 1.8077E-12 -0.019911"
+        rpy="0 0 0" />
+      <mass
+        value="0.00053747" />
+      <inertia
+        ixx="1.8438E-09"
+        ixy="4.6176E-20"
+        ixz="-8.7449E-13"
+        iyy="4.7249E-09"
+        iyz="-1.8552E-20"
+        izz="5.3635E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://body_description/meshes/left_leg_link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}left_leg_joint4"
+    type="revolute">
+    <origin
+      xyz="0.0084934 -0.020001 0"
+      rpy="0 0.0092257 0.50332" />
+    <parent
+      link="${prefix}left_leg_link3" />
+    <child
+      link="${prefix}left_leg_link4" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="10" />
+    <mimic joint="${prefix}left_leg_joint3" multiplier="-1"/>
+  </joint>
+</xacro:macro>
+</robot>
