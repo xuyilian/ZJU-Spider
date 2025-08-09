@@ -1,0 +1,8 @@
+world: worlds/spider.wbt
+controllers:
+  spider_controller:
+    type: Robot
+    path: controllers/tripod gait
+    arguments: ""
+publish: true
+type: demo
