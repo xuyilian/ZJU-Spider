@@ -34,21 +34,22 @@ delta_changes = {
 }
 
 Z_LIFT   = 20    # 抬腿高度
-Z_DOWN   = -20   # 支撑下压
+Z_DOWN   = 0   # 支撑下压
 
 Y_STEP = 30.0
 
 X_STEP = 20.0
 # ——— CPG 相关 ———
 # 初始相位：两个振荡器
-initial_phases = [0.0, np.pi]
+initial_phases_1 = [0.0, 0.0, 0.0, np.pi, np.pi, np.pi]
+initial_phases_2 = [i * np.pi/3 for i in range(6)]
 
 initial_pos = [167.36, 0, -89.84]
 # ——— 每条腿的轨迹端点及所属振荡器 ———
 LEG_CONFIG_Forward = {
     # osc = 0
     'leg2_left':  {
-        'osc': 0,
+        'osc': 5,
         'P1' : [ initial_pos[0], initial_pos[1] - 2*Y_STEP, initial_pos[2] ],
         'P3' : [ initial_pos[0], initial_pos[1] + 2*Y_STEP, initial_pos[2] ]
     },
@@ -58,18 +59,18 @@ LEG_CONFIG_Forward = {
         'P3' : [ initial_pos[0] - Y_STEP*np.sqrt(3), initial_pos[1] + Y_STEP, initial_pos[2] ]
     },
     'leg1_right': {
-        'osc': 0,
+        'osc': 4,
         'P1' : [ initial_pos[0] - Y_STEP*np.sqrt(3), initial_pos[1] - Y_STEP, initial_pos[2] ],
         'P3' : [ initial_pos[0] + Y_STEP*np.sqrt(3), initial_pos[1] + Y_STEP, initial_pos[2] ]
     },
     # osc = 1
     'leg2_right': {
-        'osc': 1,
+        'osc': 2,
         'P1' : [ initial_pos[0], initial_pos[1] - 2*Y_STEP, initial_pos[2] ],
         'P3' : [ initial_pos[0], initial_pos[1] + 2*Y_STEP, initial_pos[2] ]
     },
     'leg3_left':  {
-        'osc': 1,
+        'osc': 3,
         'P1' : [ initial_pos[0] + Y_STEP*np.sqrt(3), initial_pos[1] - Y_STEP, initial_pos[2] ],
         'P3' : [ initial_pos[0] - Y_STEP*np.sqrt(3), initial_pos[1] + Y_STEP, initial_pos[2] ]
     },

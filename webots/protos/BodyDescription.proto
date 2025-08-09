@@ -131,7 +131,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg1_left_leg_link2"
-                      boundingObject USE left_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281
@@ -350,7 +353,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg2_left_leg_link2"
-                      boundingObject USE left_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281
@@ -565,7 +571,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg3_left_leg_link2"
-                      boundingObject USE left_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281
@@ -786,7 +795,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg4_right_leg_link2"
-                      boundingObject USE right_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281
@@ -1005,7 +1017,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg5_right_leg_link2"
-                      boundingObject USE right_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281
@@ -1220,7 +1235,10 @@ PROTO BodyDescription [
                         }
                       ]
                       name "leg6_right_leg_link2"
-                      boundingObject USE right_leg_link2
+                      boundingObject Capsule {
+                        radius 0.01
+                        height 0.14232
+                      }
                       physics Physics {
                         density -1
                         mass 0.014281

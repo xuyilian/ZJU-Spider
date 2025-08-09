@@ -28,7 +28,7 @@ initial_offsets = {
 # 新增：每类关节的增量
 delta_changes = {
     'femur': 0.6,  # femur 关节的增量
-    'tibia': 0.3   # tibia 关节的增量
+    'tibia': 0   # tibia 关节的增量
 }
 
 # Paras.py

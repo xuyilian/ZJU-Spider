@@ -19,7 +19,7 @@ GROUP_A = ['leg2_left', 'leg3_right', 'leg1_right']
 GROUP_B = ['leg1_left',  'leg3_left',  'leg2_right']
 
 # CPG 初始化
-phases = cpg.initial_phases.copy()  # [φ0, φ1]
+phases = Paras.initial_phases.copy()  # [φ0, φ1]
 dt     = TIMESTEP
 
 # 时间和存储结构

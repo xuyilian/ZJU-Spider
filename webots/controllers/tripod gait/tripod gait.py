@@ -12,18 +12,18 @@ import Paras
 from ik import inverse_kinematics
 
 # ——— 参数 ———
-TIMESTEP = 8               # ms
-DURATION = 60.0            # s
+TIMESTEP = 2               # ms
+DURATION = 30.0            # s
 dt       = TIMESTEP / 1000.0
 
 # 从 Paras 读取
-LEG_CONFIG = Paras.LEG_CONFIG_Sidle
+LEG_CONFIG = Paras.LEG_CONFIG_Forward
 Z_LIFT     = Paras.Z_LIFT
 Z_DOWN     = Paras.Z_DOWN
 leg_sign   = Paras.leg_sign
 
 # ——— CPG 初始化 ———
-phases = cpg.initial_phases.copy()  # [φ0, φ1]
+phases = Paras.initial_phases_2.copy()  # [φ0, φ1]
 
 # ——— Webots 设备获取 & 初始 offset ———
 robot   = Robot()
@@ -40,7 +40,7 @@ for leg, cfg in LEG_CONFIG.items():
     }
     for jt in ('coxa','femur','tibia'):
         sensors[leg][jt].enable(TIMESTEP)
-        motors[leg][jt].setVelocity(30.0)
+        motors[leg][jt].setVelocity(100.0)
 
 # 读取一次偏移
 robot.step(TIMESTEP)
@@ -64,8 +64,8 @@ for _ in range(max_steps):
         break
 
     # 1) 更新 CPG 相位
-    dy     = cpg.coupled_oscillators2(t, phases)
-    phases = [phases[i] + dy[i]*dt for i in (0,1)]
+    dy     = cpg.coupled_oscillators6(t, phases)
+    phases = [phases[i] + dy[i]*dt for i in range(6)]
     t += dt
     times.append(t)
 
@@ -75,8 +75,11 @@ for _ in range(max_steps):
         theta = phases[osc] % (2*np.pi)
 
         # 目标足端
-        target = bezier.Bezier(cfg['P1'], cfg['P3'], theta, Z_LIFT, Z_DOWN)
+        target = bezier.Bezier_1(cfg['P1'], cfg['P3'], theta, Z_LIFT, Z_DOWN)
         θ1, θ2, θ3 = inverse_kinematics(target)
+
+
+
 
         # 加上左右符号 & 偏移
         side = leg.split('_')[-1]  # 'left' or 'right'

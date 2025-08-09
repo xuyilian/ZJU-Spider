@@ -3,7 +3,7 @@ from Paras import Paras
 from Kinematics import get_angle_from_site
 
 
-def Bezier(p1, p3, theta, legid=None):
+def Bezier(p1, p3, theta):
     """
     通用的 4 次 Bezier 插值，支持摆动抬腿和特殊的 stance 下压处理。
     对 Z 轴走特殊分段逻辑；对 X/Y 轴仅在摆动相与支撑相间隔断。
@@ -16,30 +16,21 @@ def Bezier(p1, p3, theta, legid=None):
 
     # --- 计算用于 X/Y 方向的插值参数 s_xy ---
     # 仅根据摆动（0→π/2）和支撑（π/2→2π）两段
-    if theta <= np.pi/2:
-        s_xy = theta * 2 / np.pi
+    if theta <= np.pi:
+        s_xy = theta  / np.pi
     else:
-       s_xy =(theta - np.pi/2) / (2 * np.pi - np.pi/2)
+       s_xy =(theta - np.pi) / np.pi
 
 
     # --- 计算用于 Z 方向的插值参数 s_z 与高度调整 ---
-    if 0 <= theta <= np.pi/2:
+    if 0 <= theta <= np.pi:
         # 摆动相抬腿
-        s_z = theta * 2 / np.pi
+        s_z = theta  / np.pi
         p2[2] += Paras.z_lift
     else:
-        # 支撑相及特殊下压区间
-        if legid in (0, 1) and np.pi/2 < theta <= np.pi:
-            # 腿 0,1 在 π/2→π 下压
-            p2[2] += Paras.z_down
-            s_z = (theta - np.pi/2) / (np.pi/2)
-        elif legid in (2, 3) and 3*np.pi/2 < theta < 2*np.pi:
-            # 腿 2,3 在 3π/2→2π 下压
-            p2[2] += Paras.z_down
-            s_z = (theta - 3*np.pi/2) / (np.pi/2)
-        else:
-            # 其它支撑相平滑过渡
-            s_z = 1.0
+
+        p2[2] += Paras.z_down
+        s_z = (theta - np.pi) / (np.pi)
 
     # --- 分轴合成 Bezier ---
     # 对 X,Y 轴使用 s_xy；对 Z 轴使用 s_z
