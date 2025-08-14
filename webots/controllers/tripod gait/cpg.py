@@ -102,7 +102,7 @@ def omega_linear(t, T, omega0=0.3, omega1=0.6):
     return omega0 + (omega1 - omega0) * (t / T)
 
 
-def coupled_oscillators_group6_variable(t, y, K=1.0, T=20.0, omega0=0.3, omega1=0.6):
+def coupled_oscillators_group6_variable(t, y, K=1.0, T=20.0, omega0=0.6, omega1=1.0):
     """
     12,23,45,56: 耦合目标相位差 pi/3，随omega从0.5到1等比变为0
     16,34: pi/3随omega从0.5到1等比变为pi

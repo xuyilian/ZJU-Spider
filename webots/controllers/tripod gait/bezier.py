@@ -68,6 +68,100 @@ def Bezier_1(p1, p3, theta, z_lift, z_down):
     z = mix_axis(p1[2], p2[2], p3[2], s_z)
     return np.array([x, y, z])
 
+
+def Bezier_2(p1, p3, theta, z_lift, z_down,
+             omega,
+             omega_min=0.6, omega_max=1.0):
+    """
+    阶段分界 φ(ω) 随 omega 从 π/3 线性增长到 π（钳制在 [π/3, π]）。
+    需要在调用时把当前 omega 传进来。
+    """
+    p1 = np.array(p1, dtype=float)
+    p3 = np.array(p3, dtype=float)
+    p2 = (p1 + p3) * 0.5
+
+    # 计算 φ(ω) ∈ [π/3, π]
+    phi_min = np.pi / 3.0
+    phi_max = np.pi
+    if omega_max == omega_min:
+        w = 1.0
+    else:
+        w = (omega - omega_min) / (omega_max - omega_min)
+    w = np.clip(w, 0.0, 1.0)
+    phi = phi_min + w * (phi_max - phi_min)   # 分界角
+
+    # XY 阶段参数：用 φ 和 (2π-φ) 代替原来的 π/3 和 5π/3
+    if theta <= phi:
+        s_xy = theta / phi
+    else:
+        s_xy = (2*np.pi - theta) / (2*np.pi - phi)
+
+    # Z 阶段参数：同样替换
+    if theta <= phi:
+        s_z = theta / phi
+        p2[2] += z_lift
+    else:
+        s_z = (theta - phi) / (2*np.pi - phi)
+        p2[2] += z_down
+
+    def mix_axis(c0, c2, c3, s):
+        return ((1 - s)**4 + 4*(1 - s)**3*s) * c0 + \
+               6*(1 - s)**2 * s**2       * c2 + \
+               (4*(1 - s)*s**3 + s**4)    * c3
+
+    x = mix_axis(p1[0], p2[0], p3[0], s_xy)
+    y = mix_axis(p1[1], p2[1], p3[1], s_xy)
+    z = mix_axis(p1[2], p2[2], p3[2], s_z)
+    return np.array([x, y, z])
+
+
+def Bezier_3(p1, p3, theta, z_lift, z_down,
+             omega,
+             omega_min=0.6, omega_max=1.0):
+    """
+    将 XY 方向改为随 theta 线性变化（直线轨迹）；
+    Z 方向仍用分段平滑（抬脚/落脚）曲线。
+    阶段分界 φ(ω) 随 omega 从 π/3 线性增长到 π（钳制在 [π/3, π]）。
+    """
+    p1 = np.array(p1, dtype=float)
+    p3 = np.array(p3, dtype=float)
+    p2 = (p1 + p3) * 0.5
+
+    # 计算 φ(ω) ∈ [π/3, π]
+    phi_min = np.pi / 3.0
+    phi_max = np.pi
+    if omega_max == omega_min:
+        w = 1.0
+    else:
+        w = (omega - omega_min) / (omega_max - omega_min)
+    w = np.clip(w, 0.0, 1.0)
+    phi = phi_min + w * (phi_max - phi_min)   # 分界角
+
+    # 阶段参数：根据 φ 在两个阶段各自线性推进
+    # 注意：这样会使 XY 在 φ 处速度方向发生切换（期望的往返直线）
+    if theta <= phi:
+        s_xy = theta / phi                  # 0 → 1 （摆动期：p1 → p3）
+        s_z  = theta / phi
+        p2[2] += z_lift
+    else:
+        s_xy = (2*np.pi - theta) / (2*np.pi - phi)  # 1 → 0 （支撑期：p3 → p1）
+        s_z  = (theta - phi) / (2*np.pi - phi)
+        p2[2] += z_down
+
+    # —— XY：线性插值 —— #
+    x = p1[0] + (p3[0] - p1[0]) * s_xy
+    y = p1[1] + (p3[1] - p1[1]) * s_xy
+
+    # —— Z：保持平滑插值（原来的混合曲线，仅对 z 轴使用）—— #
+    def mix_axis(c0, c2, c3, s):
+        return ((1 - s)**4 + 4*(1 - s)**3*s) * c0 + \
+               6*(1 - s)**2 * s**2       * c2 + \
+               (4*(1 - s)*s**3 + s**4)    * c3
+
+    z = mix_axis(p1[2], p2[2], p3[2], s_z)
+
+    return np.array([x, y, z])
+
 def ArcBezier(p1, p3, theta, z_lift, z_down):
     """
     p1, p3: 起点/终点三维坐标 [x,y,z]
